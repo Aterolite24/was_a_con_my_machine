@@ -1,0 +1,28 @@
+# Correctness Analysis - Benches (Binary Search)
+
+## Problem Understanding
+We have $n$ benches with $a_i$ people each. $m$ more people arrive and must be distributed among the benches.
+We want to find:
+1. Minimum possible maximum number of people on any bench ($k_{min}$).
+2. Maximum possible maximum number of people on any bench ($k_{max}$).
+
+## Algorithm
+
+### 1. Maximum Possible $k$ ($k_{max}$)
+To maximize the number of people on one bench, all $m$ newcomers should go to the bench that already has the most people. 
+$k_{max} = \max(a_i) + m$.
+
+### 2. Minimum Possible $k$ ($k_{min}$)
+We search for $k_{min}$ using Binary Search.
+- **Monotonicity**: If it is possible to distribute $m$ people such that the maximum value is $k$, then it is also possible for any $k' > k$.
+- **Lower Bound**: $\max(a_i)$ (the maximum can't be less than the current maximum).
+- **Upper Bound**: $\max(a_i) + m$ (the maximum reached if all people go to one bench).
+
+### 3. Check Function ($P(k)$)
+Given a target maximum $k$, each bench $i$ can accommodate $k - a_i$ additional people without exceeding $k$. 
+The total capacity for additional people is $\sum_{i=1}^n \max(0, k - a_i)$.
+If this sum is $\ge m$, then it is possible to distribute all $m$ people such that no bench has more than $k$ people.
+
+## Complexity
+- **Time**: $O(n \cdot \log m)$. For $n=100$ and $m=10000$, this is $\approx 1400$ operations, well within the 1-second limit.
+- **Space**: $O(n)$ to store bench counts.
