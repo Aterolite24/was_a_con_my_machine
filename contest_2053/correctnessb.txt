@@ -1,0 +1,22 @@
+Correctness Analysis for Problem B: Outstanding Impressionist
+
+This problem asks to determine independently for each impression i if it can be unique. An impression i is unique if there exists a possible array w such that wi is different from all other wj.
+
+Algorithm Logic:
+1. Singleton Identification: An impression j is "forced" to a single value x if its range [lj, rj] has length 1 (i.e., lj = rj = x). In this case, wj = x is mandatory.
+2. Uniqueness Condition: For a given impression i, we want to pick some x in [li, ri] such that no other impression j (j != i) is forced to take value x.
+   - Case 1: li = ri = x. Impression i is itself forced to value x. It can be unique if and only if no other impression j != i is forced to the same value x. This is equivalent to checking if the global frequency of singleton range [x, x] is exactly 1.
+   - Case 2: li < ri. Impression i has multiple choices. It can be unique if there exists at least one value x in [li, ri] that is not a forced value for any other impression j. Since i is not a singleton in this case, any j != i that is a singleton is just any singleton in the whole set. So we need an x in [li, ri] such that x is not a singleton value.
+3. Manual Binary Search Optimization: To efficiently check if any non-singleton value exists in [li, ri], we can:
+   - Collect all unique values that appear as singletons in a sorted vector V.
+   - The number of singleton values in the range [li, ri] is calculated using two manual binary search loops:
+     - `lb`: the index of the first element in V such that V[lb] >= li.
+     - `ub`: the index of the first element in V such that V[ub] > ri.
+   - The number of singletons in the range is `ub - lb`.
+   - If this count is less than the total number of integers in [li, ri] (which is ri - li + 1), it implies there is at least one integer x in [li, ri] that is not a singleton. Hence, impression i can be made unique by choosing that x.
+
+Complexity:
+- Singleton collection: O(N log N) using a map or O(N) using a frequency array if range is small (here 2N).
+- Building sorted vector V: O(N log N).
+- Checks for each i: N * O(log N) due to binary search.
+- Total Complexity: O(N log N), which fits within the time limit.
