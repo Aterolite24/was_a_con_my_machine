@@ -1,0 +1,110 @@
+D. A Simple RBS Problem
+time limit per test2 seconds
+memory limit per test256 megabytes
+
+A bracket sequence is called regular if it is possible to obtain a correct arithmetic expression by inserting characters +
+ and 1
+ into this sequence. For example, sequences (())(), () and (()(())) are regular, while )(, (() and (()))( are not. Let's call a regular bracket sequence RBS.
+
+You can perform the following operation on any RBS string b
+ —
+
+Choose any two disjoint, non empty substrings∗
+ of b
+ which are RBS and swap the two substrings.
+More formally, let m
+ be the length of b
+. You can perform the following operation on b
+:
+
+Choose indices 1≤l1<r1<l2<r2≤m
+ such that the substrings b[l1..r1]
+ and b[l2..r2]
+ are both RBS and swap these substrings. The string b
+ becomes b1…bl1−1bl2bl2+1…br2br1+1…bl2−1bl1bl1+1…br1br2+1…bm
+.
+You are given two strings s
+ and t
+ of length n
+ (n
+ is even) such that both s
+ and t
+ are RBS.
+
+Determine whether you can transform s
+ to t
+ using the above operation any number of times.
+
+∗
+A string a
+ is a substring of a string b
+ if a
+ can be obtained from b
+ by the deletion of several (possibly, zero or all) characters from the beginning and several (possibly, zero or all) characters from the end.
+
+Input
+Each test contains multiple test cases. The first line contains the number of test cases t
+ (1≤t≤104
+). The description of the test cases follows.
+
+The first line of each test case contains an integer n
+ (4≤n≤5⋅105
+, n
+ is even).
+
+The second line of each test case contains a string s
+ of length n
+ such that s
+ is an RBS.
+
+The third line of each test case contains a string t
+ of length n
+ such that t
+ is an RBS.
+
+It is guaranteed that the sum of n
+ over all test cases does not exceed 5⋅105
+.
+
+Output
+For each test case, print "YES" if s
+ can be transformed to t
+, and "NO" otherwise.
+
+You can output the answer in any case (upper or lower). For example, the strings "yEs", "yes", "Yes", and "YES" will be recognized as positive responses.
+
+Example
+InputCopy
+5
+4
+()()
+()()
+4
+()()
+(())
+6
+(())()
+()(())
+8
+(()()())
+()()(())
+8
+()()(())
+()(()())
+OutputCopy
+YES
+NO
+YES
+NO
+YES
+Note
+In the first test case, the two strings are already same.
+
+In the third test case, we can choose l1=1,r1=4,l2=5,r2=6
+ and transform s
+ to t
+.
+
+Here is a visualization of the operation performed in this case —
+
+(())()→()(())
