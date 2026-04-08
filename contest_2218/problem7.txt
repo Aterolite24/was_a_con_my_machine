@@ -1,0 +1,129 @@
+You are given two integers n
+ and m
+, and an array b
+ of length n
+ (0≤bi<m
+). It is guaranteed that every integer from 0
+ to m−1
+ appears in b
+ at least once.
+
+A group of n
+ people are standing in a line, in fixed positions numbered 1,2,…,n
+. They all want to sit down, but some are too socially awkward to do so immediately.
+
+For some arbitrary array a
+ of length n
+ (0≤ai<n
+), each person i
+ has a social awkwardness level ai
+. Consider the seating process which evolves in discrete units of time 0,1,2,…
+ as follows:
+
+If ai=0
+, person i
+ will sit down at time 0
+.
+Otherwise (ai>0
+), person i
+ will sit down at the beginning of a time unit t
+ if both of the following conditions are satisfied:
+At least ai
+ people have already sat down strictly before time t
+.
+At least one of their neighbors (person i−1
+ or i+1
+, if they exist) has already sat down strictly before time t
+.
+At the beginning of every unit of time, each standing person checks these conditions. All people for whom the conditions are satisfied sit down simultaneously, and then the process advances to the next unit of time.
+
+For each i
+, the value bi
+ denotes the time unit at which person i
+ sits down. Your task is to determine how many distinct arrays a
+ are consistent with the given array b
+. Since this number can be very large, output it modulo 676767677
+.
+
+Please note that this problem uses an unusual modulo, and that 676767677
+ is prime.
+
+Input
+The first line contains an integer t
+ (1≤t≤104
+) — the number of test cases.
+
+The description of each test case follows:
+
+The first line contains two integers n
+ and m
+ (1≤m≤n≤2⋅105
+) — the number of people and the total duration of the process.
+The second line contains n
+ integers b1,b2,…,bn
+ (0≤bi<m
+), where bi
+ is the time unit at which person i
+ sits down.
+It is guaranteed that the sum of n
+ over all test cases does not exceed 2⋅105
+. It is guaranteed that each provided array b
+ contains every integer from 0
+ to m−1
+.
+
+Output
+For each test case, output a single integer — the number of distinct arrays a
+ that result in the given array b
+, modulo 676767677
+.
+
+Example
+InputCopy
+7
+4 3
+0 1 2 0
+8 4
+0 1 2 3 1 2 0 1
+9 5
+1 0 1 3 4 3 2 1 0
+15 14
+3 0 1 2 3 4 5 6 7 8 9 10 11 12 13
+5 5
+4 3 0 1 2
+5 2
+0 1 1 1 0
+3 2
+0 1 1
+OutputCopy
+2
+0
+1920
+138007136
+8
+0
+0
+Note
+In the first test case, the only 2 valid arrays are [0,1,3,0]
+ and [0,2,3,0]
+. At time 0
+, the 1
+-st and 4
+-th people sit down. Then person 2
+ sits down at time 1
+. If a2
+ were 0
+, person 2
+ would have sat down at time 0
+, and if a2
+ were greater than 2
+, person 2
+ would not have been able to sit down at time 1
+ since only 2
+ people were sat down before time 1
+. It can be shown that the only value possible for a3
+ is 3
+.
+
+In the second test case, there are no valid arrays because it is impossible for person 5
+ to sit down before either of their neighbours.
